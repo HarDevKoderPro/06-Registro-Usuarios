@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios</title>
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" href="./imagenes/Code.ico" type="image/x-icon">
+</head>
+
+<body>
+
+  <!-- Contenedor general de la Aplicacion -->
+  <div class="contenedor">
+
+    <!-- Formulario de ingreso de datos -->
+    <div class="contenedor__formulario">
+
+      <!-- Titulo del Formulario -->
+      <h2 class="formulario__titulo">Ingreso de datos</h2>
+
+      <!-- Input Nombre -->
+      <label class="formulario__label">
+        <input type="text" class="formulario__input" id="inputNombre" placeholder=" " autocomplete="off">
+        <span class="formulario__span">Nombre:</span>
+      </label>
+
+      <!-- Input Apellido -->
+      <label class="formulario__label">
+        <input type="text" class="formulario__input" id="inputApellido" placeholder=" " autocomplete="off">
+        <span class="formulario__span">Apellido:</span>
+      </label>
+
+      <!-- Input Telefono -->
+      <label class="formulario__label">
+        <input type="text" class="formulario__input" id="inputTelefono" placeholder=" " autocomplete="off">
+        <span class="formulario__span">Teléfono:</span>
+      </label>
+
+      <div class="formulario__botones">
+
+        <!-- Botón Registrar -->
+        <button class="formulario__boton" id="botonRegistrar">Registrar</button>
+  
+        <!-- Botón Mostrar/ocultar tabla -->
+        <button class="formulario__boton" id="botonMostrar">Mostrar</button>
+
+      </div>
+
+
+    </div>
+
+    <!-- Tabla para Mostrar resultados -->
+    <table class="contenedor__tabla" id="tabla">
+
+      <!-- Titulo de la tabla -->
+      <caption class="tabla__titulo">Registros</caption>
+
+      <!-- Encabezado (Campos  de la tabla) -->
+      <thead>
+        <tr>
+          <th class="tabla__campos">Nombre</th>
+          <th class="tabla__campos">Apellido</th>
+          <th class="tabla__campos">Telefono</th>
+        </tr>
+      </thead>
+
+      <!-- Cuerpo de la tabla -->
+      <tbody class="tabla__resultados " id="resultados"></tbody>
+
+    </table>
+
+  </div>
+
+  <!-- scripts de la aplicacion  -->
+  <script type="module" src="./js/script.js"></script>
+</body>
+
+</html>

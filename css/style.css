@@ -1,0 +1,144 @@
+/* Reset General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuracion Fuente */
+@font-face {
+  font-family: "miFuente";
+  src: url("../fonts/Roboto-Regular.ttf");
+}
+
+/* Medidas de referencia HTML */
+html {
+  font-size: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* Configuracion del Body */
+body {
+  background: azure;
+  font-family: miFuente;
+  font-size: 100%;
+}
+
+.contenedor {
+  width: 60%;
+  margin: 1.875rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.contenedor__formulario {
+  border: 0.0625rem solid gray;
+  box-shadow: 0 0 0.1875rem rgba(0, 0, 0, 0.9);
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formulario__titulo {
+  margin-top: 0.625rem;
+  font-weight: bold;
+  font-size: 1.375rem;
+}
+
+.formulario__label {
+  margin-top: 1.5625rem;
+  display: grid;
+  width: 12.5rem;
+  padding: 0.1875rem 0rem;
+  font-size: 1.1em;
+  grid-template-areas: "input";
+
+  > * {
+    grid-area: input;
+  }
+}
+
+.formulario__span {
+  transform-origin: left;
+  transition: transfom 0.5s color 0.5s;
+}
+
+.formulario__input {
+  height: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 0.125rem solid slateblue;
+  font: inherit;
+  border-radius: 0rem;
+  padding-left: 0.125rem;
+}
+
+.formulario__input:focus + .formulario__span,
+.formulario__input:not(:placeholder-shown) + .formulario__span,
+.formulario__input:not(:placeholder-shown) + .formulario__span:focus-within {
+  color: slateblue;
+  transform: translate(0, -100%) scale(1);
+}
+
+.formulario__boton {
+  margin: 0.9375rem 0;
+  border: 0.125rem solid slateblue;
+  padding: 0.3125rem 0.4375rem;
+  border-radius: 0.9375rem;
+  font-weight: bold;
+  color: slateblue;
+  cursor: pointer;
+}
+
+.formulario__boton:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: azure;
+}
+
+.contenedor__tabla {
+  border-collapse: collapse;
+  margin: 0 auto;
+  max-width: 50rem;
+  width: 100%;
+  height: auto;
+}
+
+.tabla__titulo {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.25rem;
+  padding: 0.3125rem 0;
+  text-align: center;
+  background: rgb(3, 180, 97);
+  border: 1px solid graysilver;
+    box-shadow: 0rem 0.1875rem 0.1875rem rgba(0, 0, 0, 0.3),
+    0.1875rem 0rem 0.1875rem rgba(0, 0, 0, 0.3);
+}
+
+.tabla__campos {
+  background: #eee3e3;
+  color: rgb(12, 12, 12);
+  font-size: 1.2rem;
+  padding: 0.3125rem 0;
+  box-shadow: 0rem 0.1875rem 0.1875rem rgba(0, 0, 0, 0.3),
+    0.1875rem 0rem 0.1875rem rgba(0, 0, 0, 0.3);
+}
+
+table tr {
+  border: 1px solid silver; 
+  box-shadow: 1px 1px 1px #888888;
+}
+
+table td {
+  text-align: center;
+  font-size: 1rem;
+  padding: 8px 0;
+}
+
+.ocultar{
+  display: none;
+}
