@@ -74,6 +74,28 @@ function registrarContacto() {
 
     // Borro los inputs
     borrarInputs();
+
+    // Muestro sweet alert de confirmacion
+    mensajeSweetAlert(
+      "success",
+      "green",
+      "#FDEBD0 ",
+      "Registro exitoso!!",
+      "",
+      "green",
+      2000
+    );
+  }else{
+    // Muestro sweet alert de error
+    mensajeSweetAlert(
+      "error",
+      "red",
+      "#FDEBD0 ",
+      "Faltan datos !!",
+      "",
+      "red",
+      2000
+    );
   }
 }
 
@@ -108,6 +130,25 @@ function mostrarDatos() {
     resultados.classList.add("ocultar");
 
   }
+}
+
+// -----------------------------------------------------------------
+// Funcion para mostrar sweet alerts
+// -----------------------------------------------------------------
+  function mensajeSweetAlert(icon, iconColor, bgColor, title, text, textColor, timer) {
+  Swal.fire({
+    position: "center",
+    icon: icon,
+    iconColor: iconColor,
+    background: bgColor,
+    width: "300px",
+    heightAuto: false,
+    title: title,
+    text: text,
+    color: textColor,
+    showConfirmButton: false,
+    timer: timer
+  });
 }
 
 // -----------------------------------------------------------------
