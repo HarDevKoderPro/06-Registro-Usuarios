@@ -1,0 +1,31 @@
+/* DESKTOP FIRST */
+
+/* Celulares */
+@media (max-width: 600px) {
+  .contenedor {
+    width: 97%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contenedor__formulario {
+    height: 270px;
+  }
+
+  .formulario__label {
+    width: 250px;
+    font-size: 1.2em;
+  }
+
+  .formulario__boton {
+    font-size: 1em;
+  }
+
+  table td {
+    text-align: center;
+    font-size: 1.3em;
+    padding: 8px 0;
+  }
+}
