@@ -82,7 +82,7 @@ function registrarContacto() {
 // -----------------------------------------------------------------
 function mostrarDatos() {
   // Checamos el texto del boton
-  if (botonMostrar.textContent === "Mostrar") {
+  if (botonMostrar.textContent === "Mostrar" && datos.length > 0) {
 
     // quitamos la clase ocultar
     resultados.classList.remove("ocultar");
