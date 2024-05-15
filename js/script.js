@@ -4,6 +4,7 @@
 // VARIABLES GLOBALES
 // -----------------------------------------------------------------
 const datos = [];
+let numRegistro;
 
 // -----------------------------------------------------------------
 //  FUNCIONES
@@ -41,7 +42,8 @@ function borrarInputs() {
 // -----------------------------------------------------------------
 // 4- Constructor de Objetos (registros)
 // -----------------------------------------------------------------
-function Registro(nombre, apellido, telefono) {
+function Registro(numRegistro, nombre, apellido, telefono) {
+  this.numRegistro = numRegistro;
   this.nombre = nombre;
   this.apellido = apellido;
   this.telefono = telefono;
@@ -59,15 +61,17 @@ function registrarContacto() {
 
   // Si no hay inputs vacios procedo con el registro
   if (inputsVacios === 0) {
+
     // Obtengo los valores de los inputs
-    const [nombre, apellido, telefono] = [
+    const [numRegistro, nombre, apellido, telefono] = [
+      (datos.length)+1,
       inputNombre.value,
       inputApellido.value,
-      inputTelefono.value,
+      inputTelefono.value
     ];
 
     // Instanciamos (creamos) un objeto (registro)
-    const contacto = new Registro(nombre, apellido, telefono);
+    const contacto = new Registro(numRegistro, nombre, apellido, telefono);
 
     // Guardamos cada objeto generado en el array
     datos.push(contacto);
@@ -114,6 +118,7 @@ function mostrarDatos() {
     datos.forEach((contacto) => {
       resultados.innerHTML += `
       <tr>
+      <td>${contacto.numRegistro}</td>
       <td>${contacto.nombre}</td>
       <td>${contacto.apellido}</td>
       <td>${contacto.telefono}</td>
