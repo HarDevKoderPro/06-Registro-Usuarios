@@ -78,6 +78,13 @@ body {
   background: azure;
 }
 
+/* Elimina flechas de desplazamiento de input numerico */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .formulario__input:focus + .formulario__span,
 .formulario__input:not(:placeholder-shown) + .formulario__span,
 .formulario__input:not(:placeholder-shown) + .formulario__span:focus-within {

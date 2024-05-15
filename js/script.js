@@ -62,7 +62,7 @@ function registrarContacto() {
   // Si no hay inputs vacios procedo con el registro
   if (inputsVacios === 0) {
 
-    // Obtengo los valores de los inputs
+    // Obtengo los valores de los Campos
     const [numRegistro, nombre, apellido, telefono] = [
       (datos.length)+1,
       inputNombre.value,
