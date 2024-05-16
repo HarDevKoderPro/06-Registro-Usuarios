@@ -12,9 +12,8 @@
   }
 
   .contenedor__formulario {
-    width: 70%;
-    height: auto;
-    padding-bottom: 5px;
+    width: 85%;
+    height: 230px;
   }
 
   .formulario__label {
