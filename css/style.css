@@ -123,11 +123,18 @@ input[type="number"]::-webkit-outer-spin-button {
   gap: 2px;
 }
 
+.busqueda__input{
+  font-size: 1em;
+  padding: 5px;
+}
+
 .icon-search{
   padding: 3px;
   background: azure;
   border: none;
   cursor: pointer;
+  font-size: 1.2em;
+  color: black;
 }
 
 .contenedor__tabla {
