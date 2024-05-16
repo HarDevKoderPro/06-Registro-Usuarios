@@ -4,13 +4,11 @@
 // VARIABLES GLOBALES
 // -----------------------------------------------------------------
 const datos = [];
+const busqueda = [];
 
 // -----------------------------------------------------------------
 //  FUNCIONES
 // -----------------------------------------------------------------
-// 1- Función referenciadora elementos del DOM
-// -----------------------------------------------------------------
-const getEl = (id) => document.getElementById(id);
 
 // -----------------------------------------------------------------
 // 2- Funcion para validar inputs Vacios
@@ -55,7 +53,7 @@ function imprimirRegistro(arr) {
   arr.forEach((contacto, indice) => {
     resultados.innerHTML += `
       <tr>
-      <td>${indice+1}</td>
+      <td>${indice + 1}</td>
       <td>${contacto.nombre}</td>
       <td>${contacto.apellido}</td>
       <td>${contacto.telefono}</td>
@@ -118,6 +116,8 @@ function registrarContacto(arr) {
       2000
     );
   }
+
+  return datos;
 }
 
 // -----------------------------------------------------------------
@@ -130,7 +130,7 @@ function mostrarDatos(arr) {
     resultados.classList.remove("ocultar");
 
     // imprimo registro en la tabla
-    imprimirRegistro(arr)
+    imprimirRegistro(arr);
 
     // Cambiamos el texto del boton
     botonMostrar.textContent = "Ocultar";
@@ -171,23 +171,28 @@ function mensajeSweetAlert(
 // -----------------------------------------------------------------
 // 9- Funcion para buscar contactos por nombre
 // -----------------------------------------------------------------
-function buscarContactos (nombre){
-  let busqueda = datos.filter(contacto => contacto.nombre = nombre);
-  
+function buscarContactos() {
+  let nombreBuscado = inputBusqueda.value;
+  let busqueda = datos.filter((contacto) => contacto.nombre === nombreBuscado);
+  if(busqueda.length === 0)botonMostrar.textContent = 'Mostrar';
+
+  return busqueda;
 }
-
-
 
 // -----------------------------------------------------------------
 // PROGRAMA PRINCIPAL
 // -----------------------------------------------------------------
 
 // Referencias de elementos a utilizar
+const getEl = (id) => document.getElementById(id);
 const botonRegistrar = getEl("botonRegistrar");
 const botonMostrar = getEl("botonMostrar");
+const botonBuscar = getEl("botonBuscar");
+const botonEditar = getEl("botonEditar");
 const inputNombre = getEl("inputNombre");
 const inputApellido = getEl("inputApellido");
 const inputTelefono = getEl("inputTelefono");
+const inputBusqueda = getEl("inputBusqueda");
 const tabla = getEl("tabla");
 const resultados = getEl("resultados");
 
@@ -197,6 +202,17 @@ botonRegistrar.addEventListener("click", () => {
 });
 
 // Evento click del botón Mostrar
-botonMostrar.addEventListener("click", ()=>{
-  mostrarDatos(datos)
+botonMostrar.addEventListener("click", () => {
+  mostrarDatos(datos);
 });
+
+// Evento para boton de busqueda
+botonBuscar.addEventListener("click", () => {
+  let resultadosBusqueda = buscarContactos();
+  imprimirRegistro(resultadosBusqueda);
+});
+
+// evento para boton editar
+botonEditar.addEventListener('click', ()=>{
+  alert(`en construccion 😒`)
+})
