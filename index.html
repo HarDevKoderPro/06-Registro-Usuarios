@@ -51,31 +51,45 @@
         <!-- Botón Mostrar/ocultar tabla -->
         <button class="formulario__boton" id="botonMostrar">Mostrar</button>
 
+        <!-- Botón Editar -->
+        <button class="formulario__boton" id="botonEditar">Editar</button>
+
       </div>
 
 
     </div>
 
-    <!-- Tabla para Mostrar resultados -->
-    <table class="contenedor__tabla" id="tabla">
+    <!-- contenedor de busqueda y tabla de datos -->
+    <div class="contenedor__datos">
 
-      <!-- Titulo de la tabla -->
-      <caption class="tabla__titulo">Registros</caption>
+      <!-- Sistema de busqueda por nombre -->
+      <div class="contenedor__busqueda">
+        <input type="text" class="busquedaInput" id="busquedaInput" placeholder="Nombre del contacto">
+        <button class="icon-search"></button>
+      </div>
+  
+      <!-- Tabla para Mostrar resultados -->
+      <table class="contenedor__tabla" id="tabla">
+  
+        <!-- Titulo de la tabla -->
+        <caption class="tabla__titulo">Registros</caption>
+  
+        <!-- Encabezado (Campos  de la tabla) -->
+        <thead>
+          <tr>
+            <th class="tabla__campos">Reg</th>
+            <th class="tabla__campos">Nombre</th>
+            <th class="tabla__campos">Apellido</th>
+            <th class="tabla__campos">Telefono</th>
+          </tr>
+        </thead>
+  
+        <!-- Cuerpo de la tabla -->
+        <tbody class="tabla__resultados " id="resultados"></tbody>
+  
+      </table>
 
-      <!-- Encabezado (Campos  de la tabla) -->
-      <thead>
-        <tr>
-          <th class="tabla__campos">Reg</th>
-          <th class="tabla__campos">Nombre</th>
-          <th class="tabla__campos">Apellido</th>
-          <th class="tabla__campos">Telefono</th>
-        </tr>
-      </thead>
-
-      <!-- Cuerpo de la tabla -->
-      <tbody class="tabla__resultados " id="resultados"></tbody>
-
-    </table>
+    </div>
 
   </div>
 

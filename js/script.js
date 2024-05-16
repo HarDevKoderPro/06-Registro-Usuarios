@@ -4,7 +4,6 @@
 // VARIABLES GLOBALES
 // -----------------------------------------------------------------
 const datos = [];
-let numRegistro;
 
 // -----------------------------------------------------------------
 //  FUNCIONES
@@ -51,9 +50,9 @@ function Registro(nombre, apellido, telefono) {
 // -----------------------------------------------------------------
 // 5- Funcion que imprime registros en filas de la tabla
 // -----------------------------------------------------------------
-function imprimirRegistro() {
+function imprimirRegistro(arr) {
   resultados.innerHTML = "";
-  datos.forEach((contacto, indice) => {
+  arr.forEach((contacto, indice) => {
     resultados.innerHTML += `
       <tr>
       <td>${indice+1}</td>
@@ -65,9 +64,9 @@ function imprimirRegistro() {
 }
 
 // -----------------------------------------------------------------
-// 5- Funcion para registrar contactos
+// 6- Funcion para registrar contactos
 // -----------------------------------------------------------------
-function registrarContacto() {
+function registrarContacto(arr) {
   // Array con los inputs del formulario
   const inputsArr = [inputNombre, inputApellido, inputTelefono];
 
@@ -104,7 +103,7 @@ function registrarContacto() {
     );
 
     // imprimo registro en la tabla
-    imprimirRegistro();
+    imprimirRegistro(arr);
 
     botonMostrar.textContent = "ocultar";
   } else {
@@ -122,16 +121,16 @@ function registrarContacto() {
 }
 
 // -----------------------------------------------------------------
-// 6- Funcion para Mostrar tabla de datos
+// 7- Funcion para Mostrar tabla de datos
 // -----------------------------------------------------------------
-function mostrarDatos() {
+function mostrarDatos(arr) {
   // Checamos el texto del boton
   if (botonMostrar.textContent === "Mostrar" && datos.length > 0) {
     // quitamos la clase ocultar
     resultados.classList.remove("ocultar");
 
     // imprimo registro en la tabla
-    imprimirRegistro()
+    imprimirRegistro(arr)
 
     // Cambiamos el texto del boton
     botonMostrar.textContent = "Ocultar";
@@ -143,7 +142,7 @@ function mostrarDatos() {
 }
 
 // -----------------------------------------------------------------
-// Funcion para mostrar sweet alerts
+// 8- Funcion para mostrar sweet alerts
 // -----------------------------------------------------------------
 function mensajeSweetAlert(
   icon,
@@ -170,6 +169,16 @@ function mensajeSweetAlert(
 }
 
 // -----------------------------------------------------------------
+// 9- Funcion para buscar contactos por nombre
+// -----------------------------------------------------------------
+function buscarContactos (nombre){
+  let busqueda = datos.filter(contacto => contacto.nombre = nombre);
+  
+}
+
+
+
+// -----------------------------------------------------------------
 // PROGRAMA PRINCIPAL
 // -----------------------------------------------------------------
 
@@ -184,8 +193,10 @@ const resultados = getEl("resultados");
 
 // Evento click del boton Registrar
 botonRegistrar.addEventListener("click", () => {
-  registrarContacto();
+  registrarContacto(datos);
 });
 
 // Evento click del botón Mostrar
-botonMostrar.addEventListener("click", mostrarDatos);
+botonMostrar.addEventListener("click", ()=>{
+  mostrarDatos(datos)
+});
