@@ -3,25 +3,36 @@
 /* Celulares */
 @media (max-width: 600px) {
   .contenedor {
-    width: 97%;
+    width: 98%;
     margin: 10px auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 15px;
   }
 
   .contenedor__formulario {
-    height: 270px;
+    width: 70%;
+    height: 230px;
   }
 
   .formulario__label {
-    width: 250px;
+    width: 200px;
     font-size: 1.2em;
   }
 
   .formulario__boton {
     font-size: 1em;
   }
+
+  .contenedor__datos{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
   table td {
     text-align: center;
