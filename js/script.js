@@ -171,12 +171,12 @@ function mensajeSweetAlert(
 // -----------------------------------------------------------------
 // 9- Funcion para buscar contactos por nombre
 // -----------------------------------------------------------------
-function buscarContactos() {
-  let nombreBuscado = inputBusqueda.value;
-  let busqueda = datos.filter((contacto) => contacto.nombre === nombreBuscado);
-  if(busqueda.length === 0)botonMostrar.textContent = 'Mostrar';
+function filtrarContactos() {
+  let nombreAFiltrar = inputFiltro.value;
+  let datosFiltrados = datos.filter((contacto) => contacto.nombre === nombreAFiltrar);
+  if(datosFiltrados.length === 0)botonMostrar.textContent = 'Mostrar';
 
-  return busqueda;
+  return datosFiltrados;
 }
 
 // -----------------------------------------------------------------
@@ -187,12 +187,12 @@ function buscarContactos() {
 const getEl = (id) => document.getElementById(id);
 const botonRegistrar = getEl("botonRegistrar");
 const botonMostrar = getEl("botonMostrar");
-const botonBuscar = getEl("botonBuscar");
+const botonFiltrar = getEl("botonFiltrar");
 const botonEditar = getEl("botonEditar");
 const inputNombre = getEl("inputNombre");
 const inputApellido = getEl("inputApellido");
 const inputTelefono = getEl("inputTelefono");
-const inputBusqueda = getEl("inputBusqueda");
+const inputFiltro = getEl("inputFiltro");
 const tabla = getEl("tabla");
 const resultados = getEl("resultados");
 
@@ -207,9 +207,9 @@ botonMostrar.addEventListener("click", () => {
 });
 
 // Evento para boton de busqueda
-botonBuscar.addEventListener("click", () => {
-  let resultadosBusqueda = buscarContactos();
-  imprimirRegistro(resultadosBusqueda);
+botonFiltrar.addEventListener("click", () => {
+  let resultadosFiltrados = filtrarContactos();
+  imprimirRegistro(resultadosFiltrados);
 });
 
 // evento para boton editar

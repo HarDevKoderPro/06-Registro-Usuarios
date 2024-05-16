@@ -122,17 +122,17 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 70%;
 }
 
-.contenedor__busqueda{
+.contenedor__filtro{
   display: flex;
   gap: 2px;
 }
 
-.busqueda__input{
+.filtro__input{
   font-size: 1em;
   padding: 5px;
 }
 
-.icon-search{
+.icon-filter{
   padding: 3px;
   background: azure;
   border: none;
