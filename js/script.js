@@ -42,8 +42,7 @@ function borrarInputs() {
 // -----------------------------------------------------------------
 // 4- Constructor de Objetos (registros)
 // -----------------------------------------------------------------
-function Registro(numRegistro, nombre, apellido, telefono) {
-  this.numRegistro = numRegistro;
+function Registro(nombre, apellido, telefono) {
   this.nombre = nombre;
   this.apellido = apellido;
   this.telefono = telefono;
@@ -54,10 +53,10 @@ function Registro(numRegistro, nombre, apellido, telefono) {
 // -----------------------------------------------------------------
 function imprimirRegistro() {
   resultados.innerHTML = "";
-  datos.forEach((contacto) => {
+  datos.forEach((contacto, indice) => {
     resultados.innerHTML += `
       <tr>
-      <td>${contacto.numRegistro}</td>
+      <td>${indice+1}</td>
       <td>${contacto.nombre}</td>
       <td>${contacto.apellido}</td>
       <td>${contacto.telefono}</td>
@@ -78,15 +77,14 @@ function registrarContacto() {
   // Si no hay inputs vacios procedo con el registro
   if (inputsVacios === 0) {
     // Obtengo los valores de los Campos
-    const [numRegistro, nombre, apellido, telefono] = [
-      datos.length + 1,
+    const [nombre, apellido, telefono] = [
       inputNombre.value,
       inputApellido.value,
       inputTelefono.value,
     ];
 
     // Instanciamos (creamos) un objeto (registro)
-    const contacto = new Registro(numRegistro, nombre, apellido, telefono);
+    const contacto = new Registro(nombre, apellido, telefono);
 
     // Guardamos cada objeto generado en el array
     datos.push(contacto);
