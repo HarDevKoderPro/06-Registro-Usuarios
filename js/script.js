@@ -50,6 +50,22 @@ function Registro(numRegistro, nombre, apellido, telefono) {
 }
 
 // -----------------------------------------------------------------
+// 5- Funcion que imprime registros en filas de la tabla
+// -----------------------------------------------------------------
+function imprimirRegistro() {
+  resultados.innerHTML = "";
+  datos.forEach((contacto) => {
+    resultados.innerHTML += `
+      <tr>
+      <td>${contacto.numRegistro}</td>
+      <td>${contacto.nombre}</td>
+      <td>${contacto.apellido}</td>
+      <td>${contacto.telefono}</td>
+      </tr>`;
+  });
+}
+
+// -----------------------------------------------------------------
 // 5- Funcion para registrar contactos
 // -----------------------------------------------------------------
 function registrarContacto() {
@@ -61,13 +77,12 @@ function registrarContacto() {
 
   // Si no hay inputs vacios procedo con el registro
   if (inputsVacios === 0) {
-
     // Obtengo los valores de los Campos
     const [numRegistro, nombre, apellido, telefono] = [
-      (datos.length)+1,
+      datos.length + 1,
       inputNombre.value,
       inputApellido.value,
-      inputTelefono.value
+      inputTelefono.value,
     ];
 
     // Instanciamos (creamos) un objeto (registro)
@@ -89,7 +104,12 @@ function registrarContacto() {
       "green",
       2000
     );
-  }else{
+
+    // imprimo registro en la tabla
+    imprimirRegistro();
+
+    botonMostrar.textContent = "ocultar";
+  } else {
     // Muestro sweet alert de error
     mensajeSweetAlert(
       "error",
@@ -109,38 +129,33 @@ function registrarContacto() {
 function mostrarDatos() {
   // Checamos el texto del boton
   if (botonMostrar.textContent === "Mostrar" && datos.length > 0) {
-
     // quitamos la clase ocultar
     resultados.classList.remove("ocultar");
 
-    // Agregamos los registros del array datos
-    resultados.innerHTML = "";
-    datos.forEach((contacto) => {
-      resultados.innerHTML += `
-      <tr>
-      <td>${contacto.numRegistro}</td>
-      <td>${contacto.nombre}</td>
-      <td>${contacto.apellido}</td>
-      <td>${contacto.telefono}</td>
-      </tr>`;
-    });
+    // imprimo registro en la tabla
+    imprimirRegistro()
 
     // Cambiamos el texto del boton
     botonMostrar.textContent = "Ocultar";
-
   } else {
-
     // Cambiamos texto del boton y ocultamos el contenido
     botonMostrar.textContent = "Mostrar";
     resultados.classList.add("ocultar");
-
   }
 }
 
 // -----------------------------------------------------------------
 // Funcion para mostrar sweet alerts
 // -----------------------------------------------------------------
-  function mensajeSweetAlert(icon, iconColor, bgColor, title, text, textColor, timer) {
+function mensajeSweetAlert(
+  icon,
+  iconColor,
+  bgColor,
+  title,
+  text,
+  textColor,
+  timer
+) {
   Swal.fire({
     position: "center",
     icon: icon,
@@ -152,7 +167,7 @@ function mostrarDatos() {
     text: text,
     color: textColor,
     showConfirmButton: false,
-    timer: timer
+    timer: timer,
   });
 }
 
@@ -170,7 +185,9 @@ const tabla = getEl("tabla");
 const resultados = getEl("resultados");
 
 // Evento click del boton Registrar
-botonRegistrar.addEventListener("click", registrarContacto);
+botonRegistrar.addEventListener("click", () => {
+  registrarContacto();
+});
 
 // Evento click del botón Mostrar
 botonMostrar.addEventListener("click", mostrarDatos);
