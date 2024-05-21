@@ -1,4 +1,8 @@
+// Activar modo estricto
 "use strict";
+
+// Importar libreria de funciones
+import funciones from "./funciones.js";
 
 // -----------------------------------------------------------------
 // VARIABLES GLOBALES
@@ -182,19 +186,6 @@ function filtrarContactos() {
 // -----------------------------------------------------------------
 // PROGRAMA PRINCIPAL
 // -----------------------------------------------------------------
-
-// Referencias de elementos a utilizar
-const getEl = (id) => document.getElementById(id);
-const botonRegistrar = getEl("botonRegistrar");
-const botonMostrar = getEl("botonMostrar");
-const botonFiltrar = getEl("botonFiltrar");
-const botonEditar = getEl("botonEditar");
-const inputNombre = getEl("inputNombre");
-const inputApellido = getEl("inputApellido");
-const inputTelefono = getEl("inputTelefono");
-const inputFiltro = getEl("inputFiltro");
-const tabla = getEl("tabla");
-const resultados = getEl("resultados");
 
 // Evento click del boton Registrar
 botonRegistrar.addEventListener("click", () => {
