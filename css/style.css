@@ -39,7 +39,7 @@ body {
   width: 80%;
   margin: 0 auto;
   display: flex;
-  width:30%;
+  width: 30%;
   flex-direction: column;
   align-items: center;
 }
@@ -93,7 +93,7 @@ input[type="number"]::-webkit-outer-spin-button {
   transform: translate(0, -100%) scale(1);
 }
 
-.formulario__botones{
+.formulario__botones {
   display: flex;
   gap: 5px;
 }
@@ -113,7 +113,7 @@ input[type="number"]::-webkit-outer-spin-button {
   color: azure;
 }
 
-.contenedor__datos{
+.contenedor__datos {
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -122,17 +122,17 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 70%;
 }
 
-.contenedor__filtro{
+.contenedor__filtro {
   display: flex;
   gap: 2px;
 }
 
-.filtro__input{
+.filtro__input {
   font-size: 1em;
   padding: 5px;
 }
 
-.icon-search{
+.icon-search {
   padding: 3px;
   background: azure;
   border: none;
@@ -156,8 +156,7 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: center;
   background: rgb(3, 180, 97);
   border: 1px solid graysilver;
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3),
-    3px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3), 3px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
 .tabla__campos {
@@ -165,21 +164,52 @@ input[type="number"]::-webkit-outer-spin-button {
   color: rgb(12, 12, 12);
   font-size: 16px;
   padding: 5px 0;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3),
-    3px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3), 3px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
 table tr {
-  border: 1px solid silver; 
+  border: 1px solid silver;
   box-shadow: 1px 1px 1px #888888;
 }
 
 table td {
   text-align: center;
   font-size: 16px;
-  padding: 8px 0;
+  padding: 10px;
 }
 
-.ocultar{
+.ocultar {
   display: none;
+}
+
+.celdaTelefono{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.celdaTelefono__dato{
+  width: 70%;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.celdaTelefono__iconosSpan{
+  width: 30%;
+  padding-right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.icon-pencil{
+  color: slateblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.icon-bin{
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
 }

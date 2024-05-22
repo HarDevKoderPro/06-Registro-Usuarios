@@ -72,7 +72,15 @@ function imprimirRegistro(arr) {
       <td>${indice + 1}</td>
       <td>${contacto.nombre}</td>
       <td>${contacto.apellido}</td>
-      <td>${contacto.telefono}</td>
+      <td class='celdaTelefono'>
+        <div class="celdaTelefono__dato">
+          ${contacto.telefono}
+        </div>
+        <div class="celdaTelefono__iconosSpan">
+          <span class="icon-pencil"></span>
+          <span class="icon-bin"></span>
+        </div>
+      </td>
       </tr>`;
   });
 }
