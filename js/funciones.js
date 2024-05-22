@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 // -----------------------------------------------------------------
 // VARIABLES GLOBALES
 // -----------------------------------------------------------------
-const datos = [];
-const busqueda = [];
+export const datos = [];
+export const busqueda = [];
 
 // Referencias Elementos DOM
 const referenciarElementosDom = () => {
@@ -18,7 +18,7 @@ const referenciarElementosDom = () => {
     inputTelefono: document.querySelector("#inputTelefono"),
     inputFiltro: document.querySelector("#inputFiltro"),
     tabla: document.querySelector("#tabla"),
-    resultado: document.querySelector("#resultado"), 
+    resultado: document.querySelector("#resultado"),
   };
 };
 
@@ -89,8 +89,8 @@ function registrarContacto(arr) {
   if (inputsVacios === 0) {
     // Obtengo los valores de los Campos
     const [nombre, apellido, telefono] = [
-      inputNombre.value,
-      inputApellido.value,
+      mayusculaIniclal(inputNombre.value) ,
+      mayusculaIniclal(inputApellido.value),
       inputTelefono.value,
     ];
 
@@ -183,24 +183,34 @@ function mensajeSweetAlert(
 }
 
 // -----------------------------------------------------------------
-// 8- Funcion para buscar contactos por nombre
+// 8- Funcion para buscar contactos por nombre en tiempo real
 // -----------------------------------------------------------------
 function filtrarContactos() {
-  let nombreAFiltrar = inputFiltro.value;
-  let datosFiltrados = datos.filter((contacto) => contacto.nombre === nombreAFiltrar);
-  if(datosFiltrados.length === 0)botonMostrar.textContent = 'Mostrar';
-
+  let nombreAFiltrar = mayusculaIniclal(inputFiltro.value);
+  let datosFiltrados = datos.filter((contacto) =>
+    contacto.nombre.includes(nombreAFiltrar)
+  );
+  if (datosFiltrados.length === 0) botonMostrar.textContent = "Mostrar";
   return datosFiltrados;
 }
 
-
+// -----------------------------------------------------------------
+// 9- Funcion para colocar en mayuscula inicial dato
+// -----------------------------------------------------------------
+function mayusculaIniclal(texto) {
+  let resultado = texto
+    .split("")
+    .map((x, index) => (index === 0 ? x.toUpperCase() : x.toLowerCase()));
+  return resultado.join('');
+}
 
 // Exporto las funciones
-export default
-{
+export default {
   referenciarElementosDom,
   registrarContacto,
   mostrarDatos,
   filtrarContactos,
-  imprimirRegistro
-}
+  imprimirRegistro,
+  datos,
+  busqueda,
+};

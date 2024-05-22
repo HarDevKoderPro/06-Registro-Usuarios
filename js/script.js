@@ -1,14 +1,11 @@
 // Activar modo estricto
 "use strict";
 
-// Importar libreria de funciones
+// Importar funciones desde el módulo
 import MisFunciones from "./funciones.js";
 
-// // -----------------------------------------------------------------
-// // VARIABLES GLOBALES
-// // -----------------------------------------------------------------
-const datos = [];
-const busqueda = [];
+// Importar variables globales desde el modulo
+import { datos, busqueda } from "./funciones.js";
 
 // -----------------------------------------------------------------
 // PROGRAMA PRINCIPAL
@@ -24,13 +21,12 @@ botonMostrar.addEventListener("click", () => {
   MisFunciones.mostrarDatos(datos);
 });
 
-// Evento para boton de busqueda
-botonFiltrar.addEventListener("click", () => {
-  let resultadosFiltrados = MisFunciones.filtrarContactos();
-  MisFunciones.imprimirRegistro(resultadosFiltrados);
+inputFiltro.addEventListener("input", () => {
+  let datosFiltrados = MisFunciones.filtrarContactos();
+  MisFunciones.imprimirRegistro(datosFiltrados);
 });
 
 // evento para boton editar
-botonEditar.addEventListener('click', ()=>{
-  alert(`en construccion 😒`)
-})
+botonEditar.addEventListener("click", () => {
+  alert(`en construccion 😒`);
+});
