@@ -5,7 +5,7 @@
 import MisFunciones from "./funciones.js";
 
 // Importar variables globales desde el modulo
-import { datos, busqueda } from "./funciones.js";
+import { datos } from "./funciones.js";
 
 // -----------------------------------------------------------------
 // PROGRAMA PRINCIPAL

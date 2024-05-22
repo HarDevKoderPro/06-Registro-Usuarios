@@ -4,7 +4,6 @@
 // VARIABLES GLOBALES
 // -----------------------------------------------------------------
 export const datos = [];
-export const busqueda = [];
 
 // Referencias Elementos DOM
 const referenciarElementosDom = () => {
@@ -212,5 +211,4 @@ export default {
   filtrarContactos,
   imprimirRegistro,
   datos,
-  busqueda,
 };
