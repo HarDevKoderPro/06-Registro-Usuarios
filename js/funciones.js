@@ -26,7 +26,10 @@ const referenciarElementosDom = () => {
 // -----------------------------------------------------------------
 // 1- Funcion para validar inputs Vacios
 // -----------------------------------------------------------------
-function validacionInputs(inputsArr) {
+function validacionInputs() {
+  // Array con los inputs del formulario
+  const inputsArr = [inputNombre, inputApellido, inputTelefono];
+
   let inputsVacios = 0;
   inputsArr.forEach((input) => {
     if (input.value === "") {
@@ -78,11 +81,11 @@ function imprimirRegistro(arr) {
 // 5- Funcion para registrar contactos
 // -----------------------------------------------------------------
 function registrarContacto(arr) {
-  // Array con los inputs del formulario
-  const inputsArr = [inputNombre, inputApellido, inputTelefono];
+  // // Array con los inputs del formulario
+  // const inputsArr = [inputNombre, inputApellido, inputTelefono];
 
   // Contamos inputs vacios (validación)
-  let inputsVacios = validacionInputs(inputsArr);
+  let inputsVacios = validacionInputs();
 
   // Si no hay inputs vacios procedo con el registro
   if (inputsVacios === 0) {
