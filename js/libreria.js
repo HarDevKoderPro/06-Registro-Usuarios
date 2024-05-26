@@ -66,7 +66,7 @@ function logicaBotonMostrar() {
   }
 }
 
-// 4- Funcion que imorime y muestra datos registrados en la tabla
+// 5- Funcion que imorime y muestra datos registrados en la tabla
 function mostrarDatos(array) {
   // creo filas e inserto datos en la tabla
   resultados.innerHTML = "";
@@ -89,7 +89,7 @@ function mostrarDatos(array) {
   });
 }
 
-// 5- Funcion que registra contactos
+// 6- Funcion que registra contactos
 function registrarContacto() {
   // Contamos inputs vacios (validación)
   let cantidadInputsVacios = validarInputsVacios();
@@ -143,7 +143,7 @@ function registrarContacto() {
   return datos;
 }
 
-// 6- Funcion para mostrar sweet alerts
+// 7- Funcion para mostrar sweet alerts
 function mensajeSweetAlert(
   icon,
   iconColor,
@@ -168,7 +168,7 @@ function mensajeSweetAlert(
   });
 }
 
-// 7- Funcion para buscar contactos por nombre en tiempo real
+// 8- Funcion para buscar contactos por nombre en tiempo real
 function filtrarContactos() {
   let nombreAFiltrar = colocarMayusculaIniclal(inputFiltro.value);
   let datosFiltrados = datos.filter((contacto) =>
@@ -181,7 +181,7 @@ function filtrarContactos() {
   return datosFiltrados;
 }
 
-// 8- Funcion para colocar en mayuscula inicial dato
+// 9- Funcion para colocar en mayuscula inicial dato
 function colocarMayusculaIniclal(texto) {
   let resultado = texto
     .split("")
@@ -189,10 +189,12 @@ function colocarMayusculaIniclal(texto) {
   return resultado.join("");
 }
 
-// 9- Funcion para interactuar con la tabla
+// 10- Funcion para interactuar con la tabla
 function detectarTabla() {
   alert("Se hizo clic en la tabla");
 }
+
+
 
 // Exporto todos los elementos
 export {
