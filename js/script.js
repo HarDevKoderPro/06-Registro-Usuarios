@@ -1,32 +1,26 @@
 // Activar modo estricto
 "use strict";
 
-// Importar funciones desde el módulo
-import MisFunciones from "./funciones.js";
-
-// Importar variables globales desde el modulo
-import { datos } from "./funciones.js";
+// Importar elementos desde el módulo
+import * as libreria from "./libreria.js";
 
 // -----------------------------------------------------------------
 // PROGRAMA PRINCIPAL
 // -----------------------------------------------------------------
 
-// Evento click del boton Registrar
-botonRegistrar.addEventListener("click", () => {
-  MisFunciones.registrarContacto(datos);
-});
+// Registro de usuarios
+botonRegistrar.addEventListener("click", libreria.registrarContacto);
 
-// Evento click del botón Mostrar
-botonMostrar.addEventListener("click", () => {
-  MisFunciones.mostrarDatos(datos);
-});
+// Mostrar/Ocultar Datos
+botonMostrar.addEventListener("click", libreria.logicaBotonMostrar);
 
+// Busqueda por nombre en tiempo real
 inputFiltro.addEventListener("input", () => {
-  let datosFiltrados = MisFunciones.filtrarContactos();
-  MisFunciones.imprimirRegistro(datosFiltrados);
+  let datosFiltrados = libreria.filtrarContactos();
+  libreria.mostrarDatos(datosFiltrados);
 });
 
-// evento para boton editar
-botonEditar.addEventListener("click", () => {
-  alert(`en construccion 😒`);
+// Deteccion de tabla
+tablaDatos.addEventListener("click", () => {
+  alert("clic en tabla");
 });
