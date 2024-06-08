@@ -216,7 +216,6 @@ function delegarEventosTabla(e) {
 
     // Se pasan los datos a los inputs para editarlos
     indice = Number(indice - 1);
-    alert(typeof indice);
     inputNombre.value = nombre;
     inputApellido.value = apellido;
     inputTelefono.value = Number(telefono);
