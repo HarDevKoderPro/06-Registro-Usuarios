@@ -2,6 +2,8 @@
 
 // Variables globales
 const datos = [];
+let indice;
+let bandera = 0;
 
 // Referencias de Elementos DOM
 const referenciarElementosDom = () => {
@@ -9,7 +11,7 @@ const referenciarElementosDom = () => {
     botonRegistrar: document.querySelector("#botonRegistrar"),
     botonMostrar: document.querySelector("#botonMostrar"),
     botonFiltrar: document.querySelector("#botonFiltrar"),
-    botonEditar: document.querySelector("#botonEditar"),
+    botonEditar: document.querySelector(".icon-pencil"),
     inputNombre: document.querySelector("#inputNombre"),
     inputApellido: document.querySelector("#inputApellido"),
     inputTelefono: document.querySelector("#inputTelefono"),
@@ -66,7 +68,7 @@ function logicaBotonMostrar() {
   }
 }
 
-// 5- Funcion que imorime y muestra datos registrados en la tabla
+// 5- Funcion que imprime y muestra datos registrados en la tabla
 function mostrarDatos(array) {
   // creo filas e inserto datos en la tabla
   resultados.innerHTML = "";
@@ -106,8 +108,15 @@ function registrarContacto() {
     // Instancio (creo) un objeto (registro)
     const contacto = new Contacto(nombre, apellido, telefono);
 
-    // Guardo el objeto generado en el array de datos
-    datos.push(contacto);
+    // Acciones si se edita un contacto (editar = 1, registrar = 0)
+    if (bandera === 1) {
+      datos[indice] = contacto;
+      bandera = 0; // Reseteo Bandera para nuevos registros
+
+      // Acciones si se registra un nuevo contacto (bandera = 0)
+    } else {
+      datos.push(contacto);
+    }
 
     // Borro los inputs
     borrarInputs();
@@ -189,12 +198,44 @@ function colocarMayusculaIniclal(texto) {
   return resultado.join("");
 }
 
-// 10- Funcion para interactuar con la tabla
-function detectarTabla() {
-  alert("Se hizo clic en la tabla");
+// 10- Delegacion de eventos en la tabla
+function delegarEventosTabla(e) {
+  // Elemento objetivo
+  const elemento = e.target;
+  // acciones si se presionar icono de editar
+  if (elemento.classList.contains("icon-pencil")) {
+    // se obtiene la fila que contiene el span clickado
+    const fila = e.target.closest("tr");
+
+    // se obtienen los datos incluidos en la fila afectada
+    indice = fila.querySelector("td:nth-child(1)").textContent;
+    const nombre = fila.querySelector("td:nth-child(2)").textContent;
+    const apellido = fila.querySelector("td:nth-child(3)").textContent;
+    const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
+    bandera = 1;
+
+    // Se pasan los datos a los inputs para editarlos
+    indice = Number(indice - 1);
+    alert(typeof indice);
+    inputNombre.value = nombre;
+    inputApellido.value = apellido;
+    inputTelefono.value = Number(telefono);
+  } else if (elemento.classList.contains("icon-bin")) {
+    // se obtiene la fila que contiene el span clickado
+    const fila = e.target.closest("tr");
+
+    // Se obtiene el indice del contacto a eliminar
+    indice = fila.querySelector("td:nth-child(1)").textContent;
+
+    if (confirm("Deseas eliminar el contacto?")) {
+      // Elimino contacto del array de datos
+      datos.splice(indice - 1, 1);
+
+      // imprimo (muestro) registro en la tabla
+      mostrarDatos(datos);
+    }
+  }
 }
-
-
 
 // Exporto todos los elementos
 export {
@@ -209,5 +250,5 @@ export {
   mensajeSweetAlert,
   filtrarContactos,
   colocarMayusculaIniclal,
-  detectarTabla,
+  delegarEventosTabla,
 };

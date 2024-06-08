@@ -20,7 +20,5 @@ inputFiltro.addEventListener("input", () => {
   libreria.mostrarDatos(datosFiltrados);
 });
 
-// Deteccion de tabla
-tablaDatos.addEventListener("click", () => {
-  alert("clic en tabla");
-});
+// Delegacion de eventos en la tabla (Ediar y Eliminar)
+tablaDatos.addEventListener("click", libreria.delegarEventosTabla);
