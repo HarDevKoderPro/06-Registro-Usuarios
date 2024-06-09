@@ -104,7 +104,7 @@ function logicaBotonMostrar() {
 function mostrarDatos(array) {
   // creo filas e inserto datos en la tabla
   resultados.innerHTML = "";
-  array.forEach((contacto, indice) => {
+  array.forEach((contacto) => {
     resultados.innerHTML += `
       <tr>
       <td>${contacto.id + 1}</td>
@@ -153,16 +153,28 @@ function registrarContacto() {
 
     // Acciones si se edita un contacto (editar = 1, registrar = 0)
     if (bandera === 1) {
+      console.log(`Editando contacto existente...`);
+      console.log(`Bandera:${bandera}`);
+      console.log(`Indice a Editar:${indiceEditar}`);
+      console.log(datos);
+
       // Agrego nuevos valores al objeto a editar
-      datos[indiceEditar].nombre = inputNombre.value;
-      datos[indiceEditar].apellido = inputApellido.value;
-      datos[indiceEditar].telefono = inputTelefono.value;
+      datos[indiceEditar].nombre = nombre;
+      datos[indiceEditar].apellido = apellido;
+      datos[indiceEditar].telefono = telefono;
 
       // borro input de filtrado
       inputFiltro.value = "";
 
+      // Reseteo bandera para habilitar nueos registros sin reescribir el ediado
+      bandera = 0;
+
       // Acciones si se registra un nuevo contacto (bandera = 0)
     } else {
+      console.log(`Creando nuevo contacto...`);
+      console.log(`Bandera:${bandera}`);
+      console.log(`Indice a Editar:${indiceEditar}`);
+      console.log(datos);
 
       // Instancio (creo) un objeto (registro)
       const contacto = new Contacto(nombre, apellido, telefono);
@@ -233,20 +245,34 @@ function delegarEventosTabla(e) {
     indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
 
     if (confirm("Deseas eliminar el contacto?")) {
+      console.log(`Eliminando contacto...`);
+      console.log(`Bandera:${bandera}`);
+      console.log(`Indice a Editar:${indiceEditar}`);
+      console.log(datos);
 
       // Elimino contacto del array de datos
       datos.splice(indiceEditar, 1);
 
       // Mensaje de confirmacion exitosa de borrado
-       mensajeSweetAlert(
-         "success",
-         "green",
-         "#FDEBD0 ",
-         "Registro Eliminado exitosamente!!",
-         "",
-         "green",
-         2000
-       );
+      mensajeSweetAlert(
+        "success",
+        "green",
+        "#FDEBD0 ",
+        "Registro Eliminado exitosamente!!",
+        "",
+        "green",
+        2000
+      );
+
+      // reseteo bandera para evitar sobreescritura con nuevos registros
+      bandera = 0;
+
+      // Reestructuro los indices del array de datos
+      datos.forEach((contacto, index) => {
+        contacto.id = index;
+      });
+
+      console.log(datos);
 
       // imprimo (muestro) registro en la tabla
       mostrarDatos(datos);
