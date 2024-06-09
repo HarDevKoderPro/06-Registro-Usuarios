@@ -2,7 +2,8 @@
 
 // Variables globales
 const datos = [];
-let indiceEditar, bandera = 0;
+let indiceEditar,
+  bandera = 0;
 
 // 1- Referencias de Elementos DOM
 const referenciarElementosDom = () => {
@@ -150,32 +151,24 @@ function registrarContacto() {
       inputTelefono.value,
     ];
 
-    
     // Acciones si se edita un contacto (editar = 1, registrar = 0)
     if (bandera === 1) {
-
       // Agrego nuevos valores al objeto a editar
       datos[indiceEditar].nombre = inputNombre.value;
       datos[indiceEditar].apellido = inputApellido.value;
       datos[indiceEditar].telefono = inputTelefono.value;
-      
-      // borro input de filtrado 
-      inputFiltro.value = '';
 
-      bandera = 0; // Reseteo Bandera para nuevos registros
-      console.log('Editar usuario existente');
-      console.log(datos);
-      
+      // borro input de filtrado
+      inputFiltro.value = "";
+
       // Acciones si se registra un nuevo contacto (bandera = 0)
-      } else {
-        
-        // Instancio (creo) un objeto (registro)
-        const contacto = new Contacto(nombre, apellido, telefono);
-        
-        console.log('Registrar nuevo usuario');
-        console.log(`Bandera:${bandera}`);
-        datos.push(contacto);
-        console.log(datos);
+    } else {
+
+      // Instancio (creo) un objeto (registro)
+      const contacto = new Contacto(nombre, apellido, telefono);
+
+      // Agrego nuevo contacto al array datos
+      datos.push(contacto);
     }
 
     // Borro los inputs
@@ -218,33 +211,42 @@ function delegarEventosTabla(e) {
     const fila = e.target.closest("tr");
 
     // se obtienen los datos incluidos en la fila seleccionada
-    indiceEditar = Number(fila.querySelector("td:nth-child(1)").textContent) - 1;
+    indiceEditar =
+      Number(fila.querySelector("td:nth-child(1)").textContent) - 1;
     const nombre = fila.querySelector("td:nth-child(2)").textContent;
     const apellido = fila.querySelector("td:nth-child(3)").textContent;
     const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
 
     bandera = 1;
-    
+
     // Se pasan los datos a los inputs para editarlos
     inputNombre.value = nombre;
     inputApellido.value = apellido;
     inputTelefono.value = Number(telefono);
 
-    console.log("Editar usuario existente");
-    console.log(`Bandera:${bandera}`);
-    console.log(`Indice a Editar:${indiceEditar}`);
-    
     // Funcionalidad Eliminar Contacto
   } else if (elemento.classList.contains("icon-bin")) {
     // se obtiene la fila que contiene el span clickado
     const fila = e.target.closest("tr");
 
     // Se obtiene el indice del contacto a eliminar
-    indiceEditar = (fila.querySelector("td:nth-child(1)").textContent)-1;
+    indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
 
     if (confirm("Deseas eliminar el contacto?")) {
+
       // Elimino contacto del array de datos
       datos.splice(indiceEditar, 1);
+
+      // Mensaje de confirmacion exitosa de borrado
+       mensajeSweetAlert(
+         "success",
+         "green",
+         "#FDEBD0 ",
+         "Registro Eliminado exitosamente!!",
+         "",
+         "green",
+         2000
+       );
 
       // imprimo (muestro) registro en la tabla
       mostrarDatos(datos);
@@ -266,4 +268,4 @@ export {
   filtrarContactos,
   colocarMayusculaIniclal,
   delegarEventosTabla,
-}
+};
