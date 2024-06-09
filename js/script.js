@@ -15,10 +15,7 @@ botonRegistrar.addEventListener("click", libreria.registrarContacto);
 botonMostrar.addEventListener("click", libreria.logicaBotonMostrar);
 
 // Busqueda por nombre en tiempo real
-inputFiltro.addEventListener("input", () => {
-  let datosFiltrados = libreria.filtrarContactos();
-  libreria.mostrarDatos(datosFiltrados);
-});
+inputFiltro.addEventListener("input", libreria.filtrarContactos);
 
 // Delegacion de eventos en la tabla (Ediar y Eliminar)
 tablaDatos.addEventListener("click", libreria.delegarEventosTabla);
