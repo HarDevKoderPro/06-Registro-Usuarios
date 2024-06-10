@@ -218,33 +218,39 @@ function registrarContacto() {
 // 11- Funciones Editar y Eliminar por delegacion de Eventos
 function delegarEventosTabla(e) {
   const elemento = e.target;
+
+  // Confirmacion de Edicion de contacto
   if (elemento.classList.contains("icon-pencil")) {
-    // se obtiene la fila que contiene el icono clickado
-    const fila = e.target.closest("tr");
+    if (confirm("Deseas editar el contacto?")) {
+      // se obtiene la fila que contiene el icono clickado
+      const fila = e.target.closest("tr");
 
-    // se obtienen los datos incluidos en la fila seleccionada
-    indiceEditar =
-      Number(fila.querySelector("td:nth-child(1)").textContent) - 1;
-    const nombre = fila.querySelector("td:nth-child(2)").textContent;
-    const apellido = fila.querySelector("td:nth-child(3)").textContent;
-    const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
+      // se obtienen los datos incluidos en la fila seleccionada
+      indiceEditar =
+        Number(fila.querySelector("td:nth-child(1)").textContent) - 1;
+      const nombre = fila.querySelector("td:nth-child(2)").textContent;
+      const apellido = fila.querySelector("td:nth-child(3)").textContent;
+      const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
 
-    bandera = 1;
+      bandera = 1;
 
-    // Se pasan los datos a los inputs para editarlos
-    inputNombre.value = nombre;
-    inputApellido.value = apellido;
-    inputTelefono.value = Number(telefono);
+      // Se pasan los datos a los inputs para editarlos
+      inputNombre.value = nombre;
+      inputApellido.value = apellido;
+      inputTelefono.value = Number(telefono);
+    }
 
     // Funcionalidad Eliminar Contacto
   } else if (elemento.classList.contains("icon-bin")) {
-    // se obtiene la fila que contiene el span clickado
-    const fila = e.target.closest("tr");
 
-    // Se obtiene el indice del contacto a eliminar
-    indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
-
+    // Confirmacion de borrado del contacto
     if (confirm("Deseas eliminar el contacto?")) {
+      // se obtiene la fila que contiene el span clickado
+      const fila = e.target.closest("tr");
+
+      // Se obtiene el indice del contacto a eliminar
+      indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
+
       console.log(`Eliminando contacto...`);
       console.log(`Bandera:${bandera}`);
       console.log(`Indice a Editar:${indiceEditar}`);
