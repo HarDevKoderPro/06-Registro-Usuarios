@@ -47,37 +47,78 @@ function borrarInputs() {
   inputTelefono.value = "";
 }
 
-// 4- Funcion para mostrar sweet alerts
-function mensajeSweetAlert(
-  icon,
-  iconColor,
-  bgColor,
-  title,
-  text,
-  textColor,
-  timer
-) {
+// 4- Sweet Alert Exito
+function sweetAlertExito(mensaje) {
   Swal.fire({
     position: "center",
-    icon: icon,
-    iconColor: iconColor,
-    background: bgColor,
     width: "300px",
     heightAuto: false,
-    title: title,
-    text: text,
-    color: textColor,
     showConfirmButton: false,
-    timer: timer,
+    title: mensaje,
+    background: "#ABEBC6",
+    icon: "success",
+    iconColor: "green",
+    color: "green",
+    timer: 2000,
   });
 }
 
-// 5- Funcion para colocar en mayuscula inicial dato
+// 5- Sweet Alert Error
+function sweetAlertError(mensaje) {
+  Swal.fire({
+    position: "center",
+    width: "300px",
+    heightAuto: false,
+    showConfirmButton: false,
+    title: mensaje,
+    background: "#E6B0AA",
+    icon: "error",
+    iconColor: "red",
+    color: "red",
+    timer: 2000,
+  });
+}
+
+// 6- Sweet Alert Confirmación
+const mensajeConfirmacion = (mensaje) => {
+  Swal.fire({
+    title: mensaje,
+    position: "center",
+    icon: "warning",
+    iconColor: "#F39C12",
+    background: "#F9E79F",
+    width: "300px",
+    heightAuto: false,
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Colocar aqui logica
+
+      Swal.fire({
+        background: "#ABEBC6",
+        iconColor: "green",
+        title: "Contacto eliminado",
+        color: "green",
+        width: "300px",
+        heightAuto: false,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
+  });
+};
+
+// 7- Funcion para colocar en mayuscula inicial dato
 function colocarMayusculaIniclal(texto) {
   return texto.charAt(0).toUpperCase() + texto.substr(1).toLowerCase();
 }
 
-// 6- Constructor de Objetos (registros)
+// 8- Constructor de Objetos (registros)
 function Contacto(nombre, apellido, telefono) {
   this.id = datos.length;
   this.nombre = nombre;
@@ -85,7 +126,7 @@ function Contacto(nombre, apellido, telefono) {
   this.telefono = telefono;
 }
 
-// 7- Logica del boton mostrar/ocultar
+// 9- Logica del boton mostrar/ocultar
 function logicaBotonMostrar() {
   if (datos.length > 0) {
     if (botonMostrar.textContent === "Mostrar") {
@@ -100,7 +141,7 @@ function logicaBotonMostrar() {
   }
 }
 
-// 8- Funcion que muestra datos registrados en la tabla
+// 10- Funcion que muestra datos registrados en la tabla
 function mostrarDatos(array) {
   // creo filas e inserto datos en la tabla
   resultados.innerHTML = "";
@@ -123,7 +164,7 @@ function mostrarDatos(array) {
   });
 }
 
-// 9- Funcion para buscar contactos por nombre en tiempo real
+// 11- Funcion para buscar contactos por nombre en tiempo real
 function filtrarContactos() {
   // Capturo palabra a filtrar
   let nombreAFiltrar = colocarMayusculaIniclal(inputFiltro.value);
@@ -140,7 +181,7 @@ function filtrarContactos() {
   mostrarDatos(datosFiltrados);
 }
 
-// 10- Funcion que registra contactos
+// 12- Funcion que registra contactos
 function registrarContacto() {
   // Si no hay inputs vacios procedo con el registro
   if (!hayInputsVacios()) {
@@ -153,11 +194,6 @@ function registrarContacto() {
 
     // Acciones si se edita un contacto (editar = 1, registrar = 0)
     if (bandera === 1) {
-      console.log(`Editando contacto existente...`);
-      console.log(`Bandera:${bandera}`);
-      console.log(`Indice a Editar:${indiceEditar}`);
-      console.log(datos);
-
       // Agrego nuevos valores al objeto a editar
       datos[indiceEditar].nombre = nombre;
       datos[indiceEditar].apellido = apellido;
@@ -166,62 +202,53 @@ function registrarContacto() {
       // borro input de filtrado
       inputFiltro.value = "";
 
-      // Reseteo bandera para habilitar nueos registros sin reescribir el ediado
-      bandera = 0;
+      // Muestro sweetAlert de Exito
+      sweetAlertExito("Contacto Editado!!");
+
+      // Cambio texto boton Registrar
+      botonRegistrar.textContent = 'Registrar'
 
       // Acciones si se registra un nuevo contacto (bandera = 0)
     } else {
-      console.log(`Creando nuevo contacto...`);
-      console.log(`Bandera:${bandera}`);
-      console.log(`Indice a Editar:${indiceEditar}`);
-      console.log(datos);
-
-      // Instancio (creo) un objeto (registro)
+      // Creo (instancio) el contacto (Objeto)
       const contacto = new Contacto(nombre, apellido, telefono);
 
-      // Agrego nuevo contacto al array datos
+      // Agrego el contacto al array datos
       datos.push(contacto);
+
+      // Muestro sweetAlert de Exito
+      sweetAlertExito("Contacto Creado!!");
     }
+
+    // Reseteo bandera para habilitar nueos registros sin reescribir el editado
+    bandera = 0;
 
     // Borro los inputs
     borrarInputs();
 
-    // Muestro sweet alert de confirmacion
-    mensajeSweetAlert(
-      "success",
-      "green",
-      "#FDEBD0 ",
-      "Registro exitoso!!",
-      "",
-      "green",
-      2000
-    );
-
     // Muestro datos en la tabla
     mostrarDatos(datos);
 
+    // Cambio texto boton mostrar/ocultar
     botonMostrar.textContent = "ocultar";
+
   } else {
     // Muestro sweet alert de error
-    mensajeSweetAlert(
-      "error",
-      "red",
-      "#FDEBD0 ",
-      "Faltan datos !!",
-      "",
-      "red",
-      2000
-    );
+    sweetAlertError("Faltan Datos!!");
   }
 }
 
-// 11- Funciones Editar y Eliminar por delegacion de Eventos
+// 13- Funciones Editar y Eliminar por delegacion de Eventos
 function delegarEventosTabla(e) {
   const elemento = e.target;
 
   // Confirmacion de Edicion de contacto
   if (elemento.classList.contains("icon-pencil")) {
     if (confirm("Deseas editar el contacto?")) {
+
+      // Cambio texto boton Registrar
+      botonRegistrar.textContent = 'Editar';
+
       // se obtiene la fila que contiene el icono clickado
       const fila = e.target.closest("tr");
 
@@ -232,6 +259,7 @@ function delegarEventosTabla(e) {
       const apellido = fila.querySelector("td:nth-child(3)").textContent;
       const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
 
+      // Activo bandera para editar registros
       bandera = 1;
 
       // Se pasan los datos a los inputs para editarlos
@@ -242,7 +270,6 @@ function delegarEventosTabla(e) {
 
     // Funcionalidad Eliminar Contacto
   } else if (elemento.classList.contains("icon-bin")) {
-
     // Confirmacion de borrado del contacto
     if (confirm("Deseas eliminar el contacto?")) {
       // se obtiene la fila que contiene el span clickado
@@ -251,34 +278,22 @@ function delegarEventosTabla(e) {
       // Se obtiene el indice del contacto a eliminar
       indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
 
-      console.log(`Eliminando contacto...`);
-      console.log(`Bandera:${bandera}`);
-      console.log(`Indice a Editar:${indiceEditar}`);
-      console.log(datos);
-
       // Elimino contacto del array de datos
       datos.splice(indiceEditar, 1);
 
       // Mensaje de confirmacion exitosa de borrado
-      mensajeSweetAlert(
-        "success",
-        "green",
-        "#FDEBD0 ",
-        "Registro Eliminado exitosamente!!",
-        "",
-        "green",
-        2000
-      );
+      sweetAlertExito('Contacto Eliminado!!')
 
       // reseteo bandera para evitar sobreescritura con nuevos registros
       bandera = 0;
+
+      // Borro input de busqueda
+      inputFiltro.value = '';
 
       // Reestructuro los indices del array de datos
       datos.forEach((contacto, index) => {
         contacto.id = index;
       });
-
-      console.log(datos);
 
       // imprimo (muestro) registro en la tabla
       mostrarDatos(datos);
@@ -286,18 +301,13 @@ function delegarEventosTabla(e) {
   }
 }
 
-// 12- Exporto todos los elementos
+// 14- Exporto todos los elementos
 export {
   datos,
   referenciarElementosDom,
-  // hayInputsVacios,
-  borrarInputs,
   logicaBotonMostrar,
-  Contacto,
   registrarContacto,
   mostrarDatos,
-  mensajeSweetAlert,
   filtrarContactos,
-  colocarMayusculaIniclal,
   delegarEventosTabla,
 };
