@@ -80,7 +80,8 @@ function sweetAlertError(mensaje) {
 }
 
 // 6- Sweet Alert Confirmación
-const mensajeConfirmacion = (mensaje) => {
+// Sweet Alert de confirmacion
+const sweetAlertConfirmacion = (mensaje, callback) => {
   Swal.fire({
     title: mensaje,
     position: "center",
@@ -96,19 +97,9 @@ const mensajeConfirmacion = (mensaje) => {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
-      // Colocar aqui logica
-
-      Swal.fire({
-        background: "#ABEBC6",
-        iconColor: "green",
-        title: "Contacto eliminado",
-        color: "green",
-        width: "300px",
-        heightAuto: false,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      callback(true);
+    } else {
+      callback(false);
     }
   });
 };
@@ -206,7 +197,7 @@ function registrarContacto() {
       sweetAlertExito("Contacto Editado!!");
 
       // Cambio texto boton Registrar
-      botonRegistrar.textContent = 'Registrar'
+      botonRegistrar.textContent = "Registrar";
 
       // Acciones si se registra un nuevo contacto (bandera = 0)
     } else {
@@ -231,7 +222,6 @@ function registrarContacto() {
 
     // Cambio texto boton mostrar/ocultar
     botonMostrar.textContent = "ocultar";
-
   } else {
     // Muestro sweet alert de error
     sweetAlertError("Faltan Datos!!");
@@ -244,60 +234,98 @@ function delegarEventosTabla(e) {
 
   // Confirmacion de Edicion de contacto
   if (elemento.classList.contains("icon-pencil")) {
-    if (confirm("Deseas editar el contacto?")) {
+    // Confirmacion de edicion de contacto
+    sweetAlertConfirmacion("Editar contacto?", (respuesta) => {
+      if (respuesta) {
+        // Cambio texto boton Registrar
+        botonRegistrar.textContent = "Editar";
 
-      // Cambio texto boton Registrar
-      botonRegistrar.textContent = 'Editar';
+        // se obtiene la fila que contiene el icono clickado
+        const fila = e.target.closest("tr");
 
-      // se obtiene la fila que contiene el icono clickado
-      const fila = e.target.closest("tr");
+        // se obtienen los datos incluidos en la fila seleccionada
+        indiceEditar =
+          Number(fila.querySelector("td:nth-child(1)").textContent) - 1;
+        const nombre = fila.querySelector("td:nth-child(2)").textContent;
+        const apellido = fila.querySelector("td:nth-child(3)").textContent;
+        const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
 
-      // se obtienen los datos incluidos en la fila seleccionada
-      indiceEditar =
-        Number(fila.querySelector("td:nth-child(1)").textContent) - 1;
-      const nombre = fila.querySelector("td:nth-child(2)").textContent;
-      const apellido = fila.querySelector("td:nth-child(3)").textContent;
-      const telefono = fila.querySelector(".celdaTelefono__dato").textContent;
+        // Activo bandera para editar registros
+        bandera = 1;
 
-      // Activo bandera para editar registros
-      bandera = 1;
-
-      // Se pasan los datos a los inputs para editarlos
-      inputNombre.value = nombre;
-      inputApellido.value = apellido;
-      inputTelefono.value = Number(telefono);
-    }
+        // Se pasan los datos a los inputs para editarlos
+        inputNombre.value = nombre;
+        inputApellido.value = apellido;
+        inputTelefono.value = Number(telefono);
+      }
+    });
 
     // Funcionalidad Eliminar Contacto
   } else if (elemento.classList.contains("icon-bin")) {
+
     // Confirmacion de borrado del contacto
-    if (confirm("Deseas eliminar el contacto?")) {
-      // se obtiene la fila que contiene el span clickado
-      const fila = e.target.closest("tr");
+    sweetAlertConfirmacion("Eliminar contacto?", (respuesta) => {
 
-      // Se obtiene el indice del contacto a eliminar
-      indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
+      if (respuesta) {
+        // se obtiene la fila que contiene el span clickado
+        const fila = e.target.closest("tr");
 
-      // Elimino contacto del array de datos
-      datos.splice(indiceEditar, 1);
+        // Se obtiene el indice del contacto a eliminar
+        indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
 
-      // Mensaje de confirmacion exitosa de borrado
-      sweetAlertExito('Contacto Eliminado!!')
+        // Elimino contacto del array de datos
+        datos.splice(indiceEditar, 1);
 
-      // reseteo bandera para evitar sobreescritura con nuevos registros
-      bandera = 0;
+        // Mensaje de confirmacion exitosa de borrado
+        sweetAlertExito("Contacto Eliminado!!");
 
-      // Borro input de busqueda
-      inputFiltro.value = '';
+        // reseteo bandera para evitar sobreescritura con nuevos registros
+        bandera = 0;
 
-      // Reestructuro los indices del array de datos
-      datos.forEach((contacto, index) => {
-        contacto.id = index;
-      });
+        // Borro input de busqueda
+        inputFiltro.value = "";
 
-      // imprimo (muestro) registro en la tabla
-      mostrarDatos(datos);
-    }
+        // Reestructuro los indices del array de datos
+        datos.forEach((contacto, index) => {
+          contacto.id = index;
+        });
+
+        // Verifico si quedan datos despues de borrar contacto
+        if(datos.length === 0) botonMostrar.textContent = 'Mostrar';
+
+        // Mostrar datos
+        mostrarDatos(datos);
+        
+      }
+    });
+
+    // if (confirm("Deseas eliminar el contacto?")) {
+    //   // se obtiene la fila que contiene el span clickado
+    //   const fila = e.target.closest("tr");
+
+    //   // Se obtiene el indice del contacto a eliminar
+    //   indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
+
+    //   // Elimino contacto del array de datos
+    //   datos.splice(indiceEditar, 1);
+
+    //   // Mensaje de confirmacion exitosa de borrado
+    //   sweetAlertExito("Contacto Eliminado!!");
+
+    //   // reseteo bandera para evitar sobreescritura con nuevos registros
+    //   bandera = 0;
+
+    //   // Borro input de busqueda
+    //   inputFiltro.value = "";
+
+    //   // Reestructuro los indices del array de datos
+    //   datos.forEach((contacto, index) => {
+    //     contacto.id = index;
+    //   });
+
+    //   // imprimo (muestro) registro en la tabla
+    //   mostrarDatos(datos);
+    // }
   }
 }
 
