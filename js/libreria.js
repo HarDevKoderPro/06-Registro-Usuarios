@@ -1,7 +1,8 @@
 "use strict";
 
 // Variables globales
-const datos = [];
+let datosLs;
+let datos = [];
 let indiceEditar,
   bandera = 0;
 
@@ -190,6 +191,9 @@ function registrarContacto() {
       datos[indiceEditar].apellido = apellido;
       datos[indiceEditar].telefono = telefono;
 
+      // Actualizo cambios en Local Storage
+      localStorage.setItem("datosLs", JSON.stringify(datos));
+
       // borro input de filtrado
       inputFiltro.value = "";
 
@@ -206,6 +210,9 @@ function registrarContacto() {
 
       // Agrego el contacto al array datos
       datos.push(contacto);
+
+      // Actualizo cambios en Local Storage
+      localStorage.setItem("datosLs", JSON.stringify(datos));
 
       // Muestro sweetAlert de Exito
       sweetAlertExito("Contacto Creado!!");
@@ -262,10 +269,8 @@ function delegarEventosTabla(e) {
 
     // Funcionalidad Eliminar Contacto
   } else if (elemento.classList.contains("icon-bin")) {
-
     // Confirmacion de borrado del contacto
     sweetAlertConfirmacion("Eliminar contacto?", (respuesta) => {
-
       if (respuesta) {
         // se obtiene la fila que contiene el span clickado
         const fila = e.target.closest("tr");
@@ -275,6 +280,9 @@ function delegarEventosTabla(e) {
 
         // Elimino contacto del array de datos
         datos.splice(indiceEditar, 1);
+
+        // Actualizo cambios en Local Storage
+        localStorage.setItem("datosLs", JSON.stringify(datos));
 
         // Mensaje de confirmacion exitosa de borrado
         sweetAlertExito("Contacto Eliminado!!");
@@ -291,45 +299,42 @@ function delegarEventosTabla(e) {
         });
 
         // Verifico si quedan datos despues de borrar contacto
-        if(datos.length === 0) botonMostrar.textContent = 'Mostrar';
+        if (datos.length === 0) botonMostrar.textContent = "Mostrar";
 
         // Mostrar datos
         mostrarDatos(datos);
-        
       }
     });
-
-    // if (confirm("Deseas eliminar el contacto?")) {
-    //   // se obtiene la fila que contiene el span clickado
-    //   const fila = e.target.closest("tr");
-
-    //   // Se obtiene el indice del contacto a eliminar
-    //   indiceEditar = fila.querySelector("td:nth-child(1)").textContent - 1;
-
-    //   // Elimino contacto del array de datos
-    //   datos.splice(indiceEditar, 1);
-
-    //   // Mensaje de confirmacion exitosa de borrado
-    //   sweetAlertExito("Contacto Eliminado!!");
-
-    //   // reseteo bandera para evitar sobreescritura con nuevos registros
-    //   bandera = 0;
-
-    //   // Borro input de busqueda
-    //   inputFiltro.value = "";
-
-    //   // Reestructuro los indices del array de datos
-    //   datos.forEach((contacto, index) => {
-    //     contacto.id = index;
-    //   });
-
-    //   // imprimo (muestro) registro en la tabla
-    //   mostrarDatos(datos);
-    // }
   }
 }
 
-// 14- Exporto todos los elementos
+// 14- Configuracion del local Storage
+function configurarLocalStorage() {
+  // Verifico disponibilidad en el navegador
+  if (typeof localStorage === "undefined") {
+    console.log("Local strage no disponible...");
+  } else {
+    console.log("Local storage disponible...");
+    // confirmo existencia de variable datosLs en Local Storage
+    if (localStorage.getItem("datosLs") === null) {
+      console.log("datosLs no existe en Local Storage...");
+      // Si no existe, creo la variable datosLs
+      localStorage.setItem("datosLs", JSON.stringify([]));
+    } else {
+      console.log("datosLs existe en Local storage...");
+      // Carga inicial de datos
+      datos = [...JSON.parse(localStorage.getItem("datosLs"))];
+      if(datos.length > 0){
+        botonMostrar.textContent = 'Ocultar';
+      }else{
+        botonMostrar.textContent = 'Mostrar';
+      }
+      mostrarDatos(datos);
+    }
+  }
+}
+
+// 15- Exporto todos los elementos
 export {
   datos,
   referenciarElementosDom,
@@ -338,4 +343,5 @@ export {
   mostrarDatos,
   filtrarContactos,
   delegarEventosTabla,
+  configurarLocalStorage,
 };
