@@ -1,10 +1,9 @@
 "use strict";
-
 // Variables globales
-let datosLs;
-let datos = [];
-let indiceEditar,
-  bandera = 0;
+let datos = [],
+  indiceEditar,
+  bandera = 0,
+  datosLs;
 
 // 1- Referencias de Elementos DOM
 const referenciarElementosDom = () => {
@@ -81,7 +80,6 @@ function sweetAlertError(mensaje) {
 }
 
 // 6- Sweet Alert Confirmación
-// Sweet Alert de confirmacion
 const sweetAlertConfirmacion = (mensaje, callback) => {
   Swal.fire({
     title: mensaje,
@@ -324,10 +322,10 @@ function configurarLocalStorage() {
       console.log("datosLs existe en Local storage...");
       // Carga inicial de datos
       datos = [...JSON.parse(localStorage.getItem("datosLs"))];
-      if(datos.length > 0){
-        botonMostrar.textContent = 'Ocultar';
-      }else{
-        botonMostrar.textContent = 'Mostrar';
+      if (datos.length > 0) {
+        botonMostrar.textContent = "Ocultar";
+      } else {
+        botonMostrar.textContent = "Mostrar";
       }
       mostrarDatos(datos);
     }
